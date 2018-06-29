@@ -1,0 +1,91 @@
+﻿@model  SwinnyVetServiceAPImkII.ViewModels.ProcedureIndexData
+@{
+    /**/
+
+    ViewBag.Title = "Procedures";
+}
+<h2>Procedures</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>ProcedureID</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Procedures)
+    {
+        string selectedRow = "";
+        if (item.ProcedureID == ViewBag.ProcedureID)
+        {
+            selectedRow = "success";
+        }
+        <tr class=" @selectedRow" vallign="top">
+            <td>
+                @Html.DisplayFor(modelItem => item.ProcedureID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Select", "Treatments", new { id = item.ProcedureID }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProcedureID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProcedureID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProcedureID }) |
+            </td>
+        </tr>
+    }
+
+</table>
+@if (Model.Treatments != null)
+{
+    <h3>Treatments undertaken for selected Procedure</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>TreatmentID</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Notes</th>
+            <th>Price</th>
+        </tr>
+
+        @foreach (var item in Model.Treatments)
+        {
+            string selectedRow = "";
+            if (item.TreatmentID == ViewBag.TreatmentID)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { treatmentID = item.TreatmentID })
+                </td>
+                <td>
+                    @item.TreatmentID
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Date
+                </td>
+                <td>
+                    @item.Notes
+                </td>
+                <td>
+                    @item.Price
+                </td>
+            </tr>
+        }
+
+    </table>
+}

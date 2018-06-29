@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SwinnyVetServiceAPImkII.Models.Treatment>
+
+@{
+    ViewBag.Title = "Treatments";
+}
+
+<h2>Treatments</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>TreatmentID</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Notes</th>
+        <th>Price</th>
+        <th>Surname</th>
+        <th>Description</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TreatmentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Procedure.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TreatmentID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TreatmentID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TreatmentID })
+            </td>
+        </tr>
+    }
+
+</table>
+
